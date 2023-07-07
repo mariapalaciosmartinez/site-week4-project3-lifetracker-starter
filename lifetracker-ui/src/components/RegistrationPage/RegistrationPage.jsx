@@ -11,6 +11,7 @@ export default function Signup({setAppState}) {
     email: "",
     password: "",
     passwordConfirm: "",
+    username: "",
   })
 
   /**Checks if inputs are valid*/
@@ -52,18 +53,20 @@ export default function Signup({setAppState}) {
     }
 
     try {
-      const res = await axios.post("http://localhost:5173/register", {
-        date: form.date,
-        location: form.location,
+      console.log("0")
+      const res = await axios.post("http://localhost:5173/auth/register", {
         firstName: form.firstName,
         lastName: form.lastName,
         email: form.email,
         password: form.password,
+        username: form.username,
       })
+      console.log("1")
 
       if (res?.data?.user) {
         setAppState(res.data)
-        navigate("/portal")
+        console.log("2")
+        //render hello name
       } else {
         setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
       }
@@ -118,6 +121,18 @@ export default function Signup({setAppState}) {
               name="password"
               placeholder="password"
               value={form.password}
+              onChange={handleOnInputChange}
+            />
+            {errors.password && <span className="error">{errors.password}</span>}
+          </div>
+
+          <div className="input-field">
+            <label htmlFor="username">Username</label>
+            <input
+              type="username"
+              name="username"
+              placeholder="username"
+              value={form.username}
               onChange={handleOnInputChange}
             />
             {errors.password && <span className="error">{errors.password}</span>}

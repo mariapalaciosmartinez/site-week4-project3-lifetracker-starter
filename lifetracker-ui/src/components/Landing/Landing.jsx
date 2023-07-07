@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 export default function Landing() {
     return (
       <div className="landing">
-        <Link to={`/login`}>
+        <Link to={`/auth/login`}>
             <button className="Login">
                 <i>Login</i>
             </button>
         </Link>     
-        <Link to={`/register`}>
+        <Link to={`/auth/register`}>
             <button className="Register">
                 <i>Register</i>
             </button>
