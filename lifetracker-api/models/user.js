@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt")
 const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 const { validateFields } = require("../utils/validate")
 
+ const { dbKey } = require("../config")
+
 const { BCRYPT_WORK_FACTOR } = require("../config")
 
 class User {
@@ -68,7 +70,7 @@ class User {
     const { email, password, firstName, lastName, username } = creds
     const requiredCreds = ["email", "password", "firstName", "lastName", "username"]
     try {
-      validateFields({ required: requiredCreds, obj: creds, location: "user registration" })
+      validateFields({ required: requiredCreds, obj: creds })
     } catch (err) {
       throw err
     }
@@ -151,6 +153,38 @@ class User {
 
     return user
   }
+
+  /**
+   * upon successful login, create a token
+   * 
+   * @param {*} user 
+   * @returns 
+   */
+  static generateAuthToken(user) {
+    let payload = {user
+    }
+    let token = jwt.sign(payload, dbKey, { expiresIn: '30d' })
+    return token
+}
+
+/**
+ * verifies there was a successful login
+ * 
+ * @param {*} token 
+ * @returns 
+ */
+static verifyToken(token) {
+    if (typeof token !== 'string')
+        return {error: `token not a string, its a ${typeof token}`}
+    let verified = jwt.verify(token, dbKey)
+    if (verified) {
+        let decoded = jwt.decode(token)
+        return decoded
+    }
+    else {
+        return { error: 'invalid token' }
+    }
+}
 }
 
 module.exports = User
