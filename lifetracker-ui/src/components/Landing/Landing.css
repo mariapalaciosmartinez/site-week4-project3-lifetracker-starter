@@ -1,0 +1,44 @@
+.landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:rgba(128, 128, 128, 0.71);
+  }
+  
+  button.Login {
+    padding: 12px 24px; /* Adjust the padding values for the login button */
+    margin: 10px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    width: 120px; /* Increase the width of the login button */
+    height: 50px; /* Increase the height of the login button */
+  }
+  
+  button.Login i {
+    font-style: italic;
+  }
+  
+  button.Register {
+    padding: 12px 18px; /* Adjust the padding values for the register button */
+    margin: 10px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    width: 120px; /* Increase the width of the register button */
+    height: 50px; /* Increase the height of the register button */
+  }
+  
+  button.Register i {
+    font-style: italic;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  

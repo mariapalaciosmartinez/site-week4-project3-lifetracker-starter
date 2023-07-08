@@ -67,6 +67,7 @@ export default function Signup({setAppState}) {
         setAppState(res.data)
         console.log("2")
         //render hello name
+        navigate("/ActivityPage")
       } else {
         setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
       }
@@ -79,9 +80,8 @@ export default function Signup({setAppState}) {
 
     return (
       <div className="registration-page">
-            Hello this is the registration page
             <div className="input-field">
-              <label htmlFor="name">First Name</label>
+              <label htmlFor="name">First Name    </label>
               <input
                 type="text"
                 name="firstName"
@@ -92,7 +92,7 @@ export default function Signup({setAppState}) {
               {errors.firstName && <span className="error">{errors.firstName}</span>}
             </div>
             <div className="input-field">
-              <label htmlFor="name">Last Name</label>
+              <label htmlFor="name">Last Name   </label>
               <input
                 type="text"
                 name="lastName"
@@ -103,7 +103,7 @@ export default function Signup({setAppState}) {
               {errors.lastName && <span className="error">{errors.lastName}</span>}
             </div>
             <div className="input-field">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email    </label>
             <input
               type="email"
               name="email"
@@ -115,19 +115,7 @@ export default function Signup({setAppState}) {
           </div>
 
           <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              value={form.password}
-              onChange={handleOnInputChange}
-            />
-            {errors.password && <span className="error">{errors.password}</span>}
-          </div>
-
-          <div className="input-field">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Username    </label>
             <input
               type="username"
               name="username"
@@ -139,7 +127,19 @@ export default function Signup({setAppState}) {
           </div>
 
           <div className="input-field">
-            <label htmlFor="passwordConfirm">Confirm Password</label>
+            <label htmlFor="password">Password    </label>
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              value={form.password}
+              onChange={handleOnInputChange}
+            />
+            {errors.password && <span className="error">{errors.password}</span>}
+          </div>
+
+          <div className="input-field">
+            <label htmlFor="passwordConfirm">Confirm Password   </label>
             <input
               type="password"
               name="passwordConfirm"

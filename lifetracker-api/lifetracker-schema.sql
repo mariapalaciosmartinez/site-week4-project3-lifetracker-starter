@@ -9,12 +9,12 @@ CREATE TABLE users (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE nutrition (
-  id         SERIAL PRIMARY KEY,
-  name       TEXT NOT NULL,
-  category   TEXT NOT NULL,
-  calories   TEXT NOT NULL,
-  image_url  TEXT NOT NULL,
-  user_id    TEXT NOT NULL,
-  created_at TEXT NOT NULL
+CREATE TABLE exercise (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  category VARCHAR(255),
+  duration INTEGER,
+  intensity VARCHAR(255),
+  user_id INTEGER REFERENCES users(id),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

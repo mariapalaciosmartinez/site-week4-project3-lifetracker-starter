@@ -1,7 +1,7 @@
 import { useState, useEffect  } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
-
+import './LoginPage.css';
 import jwtDecode from "jwt-decode"
 
 export default function Login({ setAppState, setToken }) {
@@ -60,7 +60,7 @@ export default function Login({ setAppState, setToken }) {
         <br />
         <div className="form">
           <div className="input-field">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email    </label>
             <input
               type="email"
               name="email"
@@ -72,7 +72,7 @@ export default function Login({ setAppState, setToken }) {
           </div>
 
           <div className="input-field">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password    </label>
             <input
               type="password"
               name="password"

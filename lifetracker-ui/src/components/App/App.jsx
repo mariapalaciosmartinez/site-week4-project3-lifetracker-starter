@@ -10,16 +10,22 @@ import jwtDecode from "jwt-decode"
 import Landing from "../Landing/Landing";
 import LoginPage from "../LoginPage/LoginPage";
 import RegistrationPage from "../RegistrationPage/RegistrationPage";
-import ActivityPage from "../ActivityPage/ActivityPage"
+import ActivityPage from "../ActivityPage/ActivityPage";
+import ExercisePage from "../ExercisePage/ExercisePage"
+import ExerciseForm from "../ExerciseForm/ExerciseForm";
+import Navbar from "../Navbar/Navbar";
 
 function App() {
-  const [appState, setAppState] = useState({})
+  const [appState, setAppState] = useState({
+    user: null
+  })
   const [token, setToken] = useState({});
+  const [userInfo, setUser] = useState({});
   console.log(appState)
 
   async function handleUserInfo() {
     console.log('token value clientside is:', token)
-    let userInfo = await axios.post('http://localhost:5174/auth/ActivityPage', {token})
+    let userInfo = await axios.post('http://localhost:5173/auth/ActivityPage', {token})
     console.log(userInfo)
     if (userInfo) {
         setUser(userInfo.data)
@@ -38,19 +44,22 @@ useEffect(() => {
     }
 }, [token])
 
+
   return (
     <div className= "app">
       <BrowserRouter>
       <Routes>
         {/* <Route path="" element={<Navbar />} /> */}
         <Route path="/" element={<Landing />} />
-        <Route path="/auth/login" element={<LoginPage setAppState={setAppState} setToken={setToken} />} />
-        <Route path="/auth/register" element={<RegistrationPage setAppState={setAppState}/>} />
+        <Route path="/auth/login" element={<><Navbar/><LoginPage setAppState={setAppState} setToken={setToken} /></>} />
+        <Route path="/auth/register" element={<><Navbar/><RegistrationPage setAppState={setAppState}/></>} />
+        <Route path="/exercise" element={<><Navbar/><ExercisePage user={appState.user}/></>} />
+        <Route path="/exercise/create" element={<><Navbar/><ExerciseForm user={appState.user}/></>} />
+
 
         <Route path="/ActivityPage"
-        element={<ActivityPage setAppState={setAppState} appState={appState} user={appState?.user} token={token}
-        setToken={setToken}/>}
-        />
+        element={<><Navbar/><ActivityPage setAppState={setAppState} appState={appState} user={appState?.user} token={token}
+        setToken={setToken}/></>}/>
 
       </Routes>
       </BrowserRouter>

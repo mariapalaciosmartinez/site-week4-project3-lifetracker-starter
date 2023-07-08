@@ -14,13 +14,12 @@ export default function ActivityPage({ user, setAppState }) {
 
   console.log(user);
 
-  const title = isAuthenticated ? "Appointment Confirmed" : "Please login to the ActivityPage to see your appointment."
+  const title = isAuthenticated ? "" : "Please login to the ActivityPage to see your information."
 
   const content = isAuthenticated ? (
     <>
-      <p className="appt">Your appointment is on</p>
-      <p className="location">
-        Please head to on that day.
+      <p>
+        Hello
       </p>
     </>
   ) : (
