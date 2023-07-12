@@ -1,21 +1,47 @@
-.landing {
+/* .landing {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:rgba(128, 128, 128, 0.71);
+  } */
+  .landing {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color:rgba(128, 128, 128, 0.71);
   }
   
+  .content-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Add any additional styles you want */
+  
+
+  img {
+    max-width: 200px;
+    height: auto;
+  }
+  
   button.Login {
-    padding: 12px 24px; /* Adjust the padding values for the login button */
+    padding: 12px 24px;
     margin: 10px;
     border: none;
     background-color: #333;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    width: 120px; /* Increase the width of the login button */
-    height: 50px; /* Increase the height of the login button */
+    width: 120px; 
+    height: 50px; 
   }
   
   button.Login i {
@@ -23,15 +49,15 @@
   }
   
   button.Register {
-    padding: 12px 18px; /* Adjust the padding values for the register button */
+    padding: 12px 18px; 
     margin: 10px;
     border: none;
     background-color: #333;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    width: 120px; /* Increase the width of the register button */
-    height: 50px; /* Increase the height of the register button */
+    width: 120px; 
+    height: 50px; 
   }
   
   button.Register i {

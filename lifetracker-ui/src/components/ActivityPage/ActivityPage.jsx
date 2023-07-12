@@ -1,30 +1,49 @@
-import { Link, useNavigate } from "react-router-dom"
-// import moment from "moment"
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
-import "./ActivityPage.css"
+import "./ActivityPage.css";
 
 export default function ActivityPage({ user, setAppState }) {
-  const navigate = useNavigate()
-  const isAuthenticated = Boolean(user?.email)
+  const navigate = useNavigate();
+  const isAuthenticated = Boolean(user?.email);
+  const [averageDuration, setAverageDuration] = useState(0);
 
   const handleOnLogout = () => {
-    setAppState({})
-    navigate("/")
-  }
+    navigate("/");
+    localStorage.removeItem("token")
+    setAppState(null)
+    window.location.reload();
+  };
 
-  console.log(user);
+  useEffect(() => {
+    const fetchAverageDuration = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5173/auth/ActivityPage/average-duration/${user.id}`,
+          {
+            params: { user_id: user.id },
+          }
+        );
+        setAverageDuration(res.data.averageDuration);
+      } catch (err) {
+        console.error("Failed to fetch average duration", err);
+      }
+    };
+    fetchAverageDuration();
+  }, []);  
 
-  const title = isAuthenticated ? "" : "Please login to the ActivityPage to see your information."
+  const title = isAuthenticated ? "" : "Please login to the Activity Page to see your information.";
 
   const content = isAuthenticated ? (
     <>
-      <p>
-        Hello
-      </p>
+      <p>Hello, you have logged in and can view this Activity Page.</p>
+      <br />
+      <p>Please refer to the navbar to explore your exercise page or to end your session!</p>
     </>
   ) : (
     <p className="appt">Thank you!</p>
-  )
+  );
 
   const button = isAuthenticated ? (
     <button className="btn primary" onClick={handleOnLogout}>
@@ -34,7 +53,15 @@ export default function ActivityPage({ user, setAppState }) {
     <Link to="/auth/login">
       <button className="btn primary">Login</button>
     </Link>
-  )
+  );
+
+  const averageTime = isAuthenticated ? (
+    <p>Average Exercise Duration: {averageDuration} min</p>
+  ) : (
+    <Link to="/auth/login">
+      <button className="btn primary">Login</button>
+    </Link>
+  );
 
   return (
     <div className="ActivityPage">
@@ -46,8 +73,9 @@ export default function ActivityPage({ user, setAppState }) {
           </div>
           <div className="content">{content}</div>
           <div className="footer">{button}</div>
+          <div className="averageTime">{averageTime}</div>
         </div>
       </div>
     </div>
-  )
+  );
 }

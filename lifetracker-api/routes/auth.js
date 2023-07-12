@@ -61,14 +61,16 @@ router.get("/exercise/:user_id",  async function (req, res, next) {
   }
 });
 
-// router.post("/exercise/create", async function (req, res, next) {
-//   try {
-//     const exercise = await exercise.create(req.body);
-//     return res.status(201).json({ exercise });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.get("/ActivityPage/average-duration/:user_id", async function (req, res, next) {
+  try {
+    const averageDuration = await exercise.calculateAverageDurationByUserId(req.params.user_id);
+    return res.status(200).json({ averageDuration });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 router.post("/exercise/create", async function (req, res, next) {
   try {
     console.log("we got this far")

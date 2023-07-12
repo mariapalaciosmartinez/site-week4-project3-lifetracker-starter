@@ -50,16 +50,20 @@ useEffect(() => {
       <BrowserRouter>
       <Routes>
         {/* <Route path="" element={<Navbar />} /> */}
-        <Route path="/" element={<Landing />} />
-        <Route path="/auth/login" element={<><Navbar/><LoginPage setAppState={setAppState} setToken={setToken} /></>} />
-        <Route path="/auth/register" element={<><Navbar/><RegistrationPage setAppState={setAppState}/></>} />
-        <Route path="/exercise" element={<><Navbar/><ExercisePage user={appState.user}/></>} />
-        <Route path="/exercise/create" element={<><Navbar/><ExerciseForm user={appState.user}/></>} />
+        <Route path="/" element={<><Navbar appState={appState} setAppState={setAppState}/><Landing /></>} />
+        <Route path="/auth/login" element={<><Navbar appState={appState} setAppState={setAppState}/><LoginPage setAppState={setAppState} setToken={setToken} /></>} />
+        <Route path="/auth/register" element={<><Navbar appState={appState} setAppState={setAppState}/><RegistrationPage setAppState={setAppState}/></>} />
+        <Route path="/exercise" element={<><Navbar appState={appState} setAppState={setAppState}/><ExercisePage user={appState.user}/></>} />
+        <Route path="/exercise/create" element={<><Navbar appState={appState} setAppState={setAppState}/><ExerciseForm user={appState.user}/></>} />
 
 
         <Route path="/ActivityPage"
-        element={<><Navbar/><ActivityPage setAppState={setAppState} appState={appState} user={appState?.user} token={token}
-        setToken={setToken}/></>}/>
+        element={<><Navbar appState={appState} setAppState={setAppState}/><ActivityPage
+        setAppState={setAppState}
+        appState={appState}
+        user={appState.user}
+        setToken={setToken}
+      /></>}/>
 
       </Routes>
       </BrowserRouter>
